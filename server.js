@@ -19,7 +19,7 @@ const PORT = process.env.PORT || 3000;
 const DB_FILE = path.join(__dirname, 'nicknames.json');
 
 // Referal bonusi miqdori (har bir taklif qilingan do'st uchun atom)
-const REFERRAL_BONUS = 20;
+const REFERRAL_BONUS = 50;
 
 // Admin nickname va parol shu yerda belgilanadi (parolni env orqali ham berish mumkin)
 const ADMIN_NICKNAME = '@atlas_ilmUSTOZ';
