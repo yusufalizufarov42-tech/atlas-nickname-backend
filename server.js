@@ -317,7 +317,32 @@ app.get('/api/leaderboard', (req, res) => {
 
   res.json({ leaderboard: list });
 });
+// ---- TELEGRAM KANAL OBUNASINI TEKSHIRISH ----
+const BOT_TOKEN = process.env.BOT_TOKEN || '8816941209:AAEY4HG8ruVjoVF_50Ugbswb5vF5Ss-mwr4'; 
+const CHANNEL_USERNAME = '@atlas_ilm';
 
+app.post('/api/check-subscription', async (req, res) => {
+  const { telegramUserId } = req.body || {};
+
+  if (!telegramUserId) {
+    return res.status(400).json({ isSubscribed: false, error: "telegramUserId talab qilinadi" });
+  }
+
+  try {
+    const url = `https://api.telegram.org/bot${BOT_TOKEN}/getChatMember?chat_id=${CHANNEL_USERNAME}&user_id=${telegramUserId}`;
+    const response = await fetch(url);
+    const data = await response.json();
+
+    if (data.ok && ['creator', 'administrator', 'member'].includes(data.result?.status)) {
+      return res.json({ isSubscribed: true });
+    } else {
+      return res.json({ isSubscribed: false });
+    }
+  } catch (error) {
+    console.error("Obuna tekshirishda xato:", error);
+    return res.status(500).json({ isSubscribed: false, error: "Serverda xatolik yuz berdi" });
+  }
+});
 app.listen(PORT, () => {
   console.log(`Atlas Kimyo backend server ${PORT}-portda ishga tushdi`);
 });
