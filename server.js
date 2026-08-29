@@ -23,7 +23,7 @@ const REFERRAL_BONUS = 50;
 
 // Admin nickname va parol shu yerda belgilanadi (parolni env orqali ham berish mumkin)
 const ADMIN_NICKNAME = '@atlas_ilmUSTOZ';
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '22042000yusuf';
+const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || '22042000';
 
 app.use(cors());
 app.use(express.json({ limit: '15mb' })); // fayllar base64 sifatida yuborilgani uchun chegarani oshiramiz
